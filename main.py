@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, abort
 from flask_mongoengine import MongoEngine
-from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 import uuid
 import jwt
