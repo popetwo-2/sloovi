@@ -51,26 +51,6 @@ def token_required(f):
     return decorator
 
 
-def tokens_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        token = None
-        if "Authorization" in request.headers:
-            token = request.headers["Authorization"].split(" ")[1]
-
-        if not token:
-            return jsonify({'message': 'a valid token is missing'})
-        try:
-            data = jwt.decode(token, app.config['SECRET_KEY'], algorithm="HS256")
-            current_user = User.objects.get(public_id=data['public_id'])
-        except:
-            return jsonify({'message': 'token is invalid'}), 403
-
-        return f(current_user, *args, **kwargs)
-
-    return decorated
-
-
 class Template(db.Document):
     template_name = db.StringField(required=True, max_length=100)
     subject = db.StringField(required=True, max_length=100)
