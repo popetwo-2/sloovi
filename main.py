@@ -7,12 +7,11 @@ import jwt
 import datetime
 import os
 
-url = "mongodb+srv://superadmin:e1Fh7xUwq4SNNBDy@sloovi.yxc6lph.mongodb.net/?retryWrites=true&w=majority"
 
 app = Flask(__name__)
 app.config['MONGODB_SETTINGS'] = {
     'db': 'sloovi',
-    'host': url,
+    'host': os.getenv('MONGO_ATLAS'),
     'port': 27017,
 }
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
