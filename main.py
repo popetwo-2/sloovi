@@ -70,8 +70,6 @@ def login_user():
         }
         return jsonify(error), 403
 
-    #   users = User.query.filter_by(email=auth.get('email')).first()
-
     if user:
         token = jwt.encode(
             {'public_id': user.public_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=45)},
